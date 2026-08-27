@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JESYMCA | Hub de Proyectos & Aplicaciones</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b',
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Efecto de scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #6366f1;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative overflow-x-hidden">
+
+  <!-- Fondos y luces ambientales difuminadas -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl filter animate-blob"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl filter animate-blob animation-delay-2000"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl filter animate-blob animation-delay-4000"></div>
+  </div>
+
+  <!-- Barra de Navegación -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/70 border-b border-slate-800/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo y Título -->
+      <a href="https://jesymca.github.io/" class="flex items-center gap-3.5 group focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-xl p-1">
+        <div class="relative w-12 h-12 rounded-xl bg-slate-900 border border-slate-700/60 p-1 flex items-center justify-center shadow-lg shadow-indigo-500/10 group-hover:border-indigo-500 transition-all duration-300">
+          <img 
+            src="./img/logo.png" 
+            alt="Logo JESYMCA" 
+            id="main-logo"
+            class="w-full h-full object-contain rounded-lg"
+            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-lg\'>JM</div>';"
+          >
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent group-hover:to-indigo-400 transition-all">
+            JESYMCA
+          </span>
+          <span class="block text-xs font-medium text-slate-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            GitHub Hub
+          </span>
+        </div>
+      </a>
+
+      <!-- Accesos Rápidos -->
+      <div class="flex items-center gap-3">
+        <a 
+          href="https://github.com/jesymca" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 bg-slate-900 hover:bg-slate-800 hover:text-white border border-slate-800 hover:border-slate-700 rounded-xl transition duration-200 shadow-sm"
+        >
+          <i class="fa-brands fa-github text-lg"></i>
+          <span class="hidden sm:inline">Perfil GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+    
+    <!-- Hero / Presentación -->
+    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 backdrop-blur-md">
+        <i class="fa-solid fa-code-branch"></i>
+        <span>Despliegues en GitHub Pages</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight">
+        Catálogo de <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Proyectos Activos</span>
+      </h1>
+      <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
+        Explora y accede rápidamente a los sistemas de gestión, plataformas educativas y herramientas interactivas desarrolladas y alojadas en línea.
+      </p>
+
+      <!-- Barra de Búsqueda y Filtros -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
+        <!-- Input de Búsqueda -->
+        <div class="relative w-full">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Buscar proyecto por nombre o categoría..." 
+            class="w-full pl-11 pr-10 py-3 bg-slate-900/90 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent backdrop-blur-md transition shadow-inner"
+            oninput="filtrarProyectos()"
+          >
+          <button 
+            id="clearSearch" 
+            onclick="limpiarBusqueda()" 
+            class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 p-1 rounded-md"
+            title="Limpiar"
+          >
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtros por Categoría -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="categoryFilters">
+        <button onclick="filtrarCategoria('todos')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 shadow-sm transition">Todos</button>
+        <button onclick="filtrarCategoria('gestion')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition">Logística & Gestión</button>
+        <button onclick="filtrarCategoria('educacion')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition">Educación</button>
+        <button onclick="filtrarCategoria('web')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition">Web & Apps</button>
+      </div>
+    </div>
+
+    <!-- Grid de Proyectos -->
+    <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- PROYECTO 1: Inventario -->
+      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1 flex flex-col justify-between"
+           data-title="inventario control stock almacén productos" 
+           data-category="gestion">
+        <div>
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Activo
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Gestión & Stock</span>
+            <h2 class="text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">Sistema de Inventario</h2>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Control integral de existencias, entradas, salidas y catálogo de productos con seguimiento eficiente de inventarios.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+          <a href="https://jesymca.github.io/inventario" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all shadow-md shadow-indigo-600/20 group-hover:shadow-indigo-600/40">
+            <span>Abrir Aplicación</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="copiarEnlace('https://jesymca.github.io/inventario')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+            <i class="fa-regular fa-copy text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROYECTO 2: Kizme -->
+      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-pink-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-1 flex flex-col justify-between"
+           data-title="kizme web app dinamica interactiva" 
+           data-category="web">
+        <div>
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Activo
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="text-xs font-semibold text-pink-400 uppercase tracking-wider">Aplicación Web</span>
+            <h2 class="text-xl font-bold text-white group-hover:text-pink-300 transition-colors">Kizme</h2>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Experiencia web interactiva con interfaz intuitiva, diseñada para brindar dinamismo y conectividad moderna.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+          <a href="https://jesymca.github.io/kizme" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-medium text-sm transition-all shadow-md shadow-pink-600/20 group-hover:shadow-pink-600/40">
+            <span>Abrir Aplicación</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="copiarEnlace('https://jesymca.github.io/kizme')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+            <i class="fa-regular fa-copy text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROYECTO 3: Venplay -->
+      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-1 flex flex-col justify-between"
+           data-title="venplay juegos multimedia entretenimiento" 
+           data-category="web">
+        <div>
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Activo
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Multimedia & Ocio</span>
+            <h2 class="text-xl font-bold text-white group-hover:text-amber-300 transition-colors">Venplay</h2>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Plataforma de entretenimiento y contenido multimedia con acceso rápido y diseño adaptativo a pantallas móviles y PC.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+          <a href="https://jesymca.github.io/venplay" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-medium text-sm transition-all shadow-md shadow-amber-600/20 group-hover:shadow-amber-600/40">
+            <span>Abrir Aplicación</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="copiarEnlace('https://jesymca.github.io/venplay')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+            <i class="fa-regular fa-copy text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROYECTO 4: Planificación del Proceso de Aprendizaje -->
+      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1 flex flex-col justify-between"
+           data-title="planificacion del proceso de aprendizaje educacion docente clases curriculo" 
+           data-category="educacion">
+        <div>
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Activo
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Gestión Pedagógica</span>
+            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">Planificación Docente</h2>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Herramienta estructurada para la formulación, diseño de estrategias y cronogramas del proceso de enseñanza-aprendizaje.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+          <a href="https://jesymca.github.io/Planificaci-n-del-Proceso-de-Aprendizaje/" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all shadow-md shadow-emerald-600/20 group-hover:shadow-emerald-600/40">
+            <span>Abrir Aplicación</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="copiarEnlace('https://jesymca.github.io/Planificaci-n-del-Proceso-de-Aprendizaje/')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+            <i class="fa-regular fa-copy text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROYECTO 5: Evaluación de Aprendizajes -->
+      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col justify-between"
+           data-title="evaluacion de aprendizajes notas rubricas calificaciones estudiantes" 
+           data-category="educacion">
+        <div>
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Activo
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Métrica Educativa</span>
+            <h2 class="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">Evaluación de Aprendizajes</h2>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Módulo para el registro, ponderación de rúbricas y seguimiento continuo del rendimiento y logros estudiantiles.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+          <a href="https://jesymca.github.io/EvaluacionAprendizajes/" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-medium text-sm transition-all shadow-md shadow-cyan-600/20 group-hover:shadow-cyan-600/40">
+            <span>Abrir Aplicación</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="copiarEnlace('https://jesymca.github.io/EvaluacionAprendizajes/')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+            <i class="fa-regular fa-copy text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- PROYECTO 6: Control de Gandolas -->
+      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-violet-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/10 hover:-translate-y-1 flex flex-col justify-between"
+           data-title="control gandolas camiones transporte logistica carga pesaje despacho" 
+           data-category="gestion">
+        <div>
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-truck-moving"></i>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Activo
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="text-xs font-semibold text-violet-400 uppercase tracking-wider">Transporte Pesado</span>
+            <h2 class="text-xl font-bold text-white group-hover:text-violet-300 transition-colors">Control de Gandolas</h2>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Monitoreo logístico de tráfico pesado, registros de pesaje, despachos, conductores y tiempos de carga/descarga.
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+          <a href="https://jesymca.github.io/control_gandolas/" target="_blank" rel="noopener noreferrer" 
+             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium text-sm transition-all shadow-md shadow-violet-600/20 group-hover:shadow-violet-600/40">
+            <span>Abrir Aplicación</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="copiarEnlace('https://jesymca.github.io/control_gandolas/')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+            <i class="fa-regular fa-copy text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mensaje cuando no hay resultados de búsqueda -->
+    <div id="noResults" class="hidden text-center py-16 px-4">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 text-2xl">
+        <i class="fa-solid fa-folder-open"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-200">No se encontraron proyectos</h3>
+      <p class="text-slate-500 text-sm mt-1 max-w-sm mx-auto">Prueba con otro término de búsqueda o selecciona la categoría "Todos".</p>
+      <button onclick="limpiarBusqueda(); filtrarCategoria('todos');" class="mt-4 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+        Restablecer Filtros
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Notificación Toast Copiado -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 bg-slate-900 text-white border border-indigo-500/50 rounded-xl shadow-2xl backdrop-blur-lg">
+    <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <span class="text-xs font-medium" id="toastMessage">Enlace copiado al portapapeles</span>
+  </div>
+
+  <!-- Pie de Página -->
+  <footer class="border-t border-slate-900 bg-slate-950/80 backdrop-blur-md py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© <span id="currentYear"></span> JESYMCA. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="https://github.com/jesymca" target="_blank" class="hover:text-indigo-400 transition flex items-center gap-1.5">
+          <i class="fa-brands fa-github"></i>
+          <span>GitHub</span>
+        </a>
+        <span>•</span>
+        <span class="text-slate-600">Desarrollado con ❤️ para GitHub Pages</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lógica JavaScript -->
+  <script>
+    // Configurar año actual en el pie de página
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    let categoriaActual = 'todos';
+
+    // Función para filtrar proyectos por búsqueda y categoría
+    function filtrarProyectos() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.project-card');
+      const clearBtn = document.getElementById('clearSearch');
+      let visibles = 0;
+
+      // Mostrar/ocultar botón para limpiar input
+      if (filter.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      cards.forEach(card => {
+        const titleData = card.getAttribute('data-title').toLowerCase();
+        const categoryData = card.getAttribute('data-category');
+        
+        const coincideTexto = titleData.includes(filter);
+        const coincideCat = (categoriaActual === 'todos' || categoryData === categoriaActual);
+
+        if (coincideTexto && coincideCat) {
+          card.classList.remove('hidden');
+          visibles++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Mostrar o esconder estado vacío
+      const noResults = document.getElementById('noResults');
+      if (visibles === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    // Filtro rápido por botones de categoría
+    function filtrarCategoria(cat) {
+      categoriaActual = cat;
+      const botones = document.querySelectorAll('.filter-btn');
+
+      botones.forEach(btn => {
+        btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-500');
+        btn.classList.add('bg-slate-900', 'text-slate-400', 'border-slate-800');
+      });
+
+      // Activar botón seleccionado
+      const btnActivo = event.target;
+      if (btnActivo) {
+        btnActivo.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-500');
+        btnActivo.classList.remove('bg-slate-900', 'text-slate-400', 'border-slate-800');
+      }
+
+      filtrarProyectos();
+    }
+
+    // Limpiar input de búsqueda
+    function limpiarBusqueda() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      filtrarProyectos();
+      input.focus();
+    }
+
+    // Copiar enlace al portapapeles con feedback tipo toast
+    function copiarEnlace(url) {
+      // Método seguro de copia compatible con iframes
+      const tempInput = document.createElement('input');
+      tempInput.value = url;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      // Mostrar Toast
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      toastMessage.textContent = '¡Enlace copiado al portapapeles!';
+      
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
