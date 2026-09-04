@@ -28,13 +28,13 @@
             }
           },
           animation: {
-            'blob': 'blob 7s infinite',
+            'blob': 'blob 8s infinite',
           },
           keyframes: {
             blob: {
               '0%': { transform: 'translate(0px, 0px) scale(1)' },
-              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '33%': { transform: 'translate(30px, -40px) scale(1.08)' },
+              '66%': { transform: 'translate(-25px, 20px) scale(0.95)' },
               '100%': { transform: 'translate(0px, 0px) scale(1)' },
             }
           }
@@ -44,33 +44,33 @@
   </script>
 
   <style>
-    /* Efecto de scrollbar personalizada */
+    /* Scrollbar personalizada */
     ::-webkit-scrollbar {
       width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #0f172a;
+      background: #090d16;
     }
     ::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #1e293b;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #6366f1;
+      background: #4f46e5;
     }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative overflow-x-hidden">
 
-  <!-- Fondos y luces ambientales difuminadas -->
+  <!-- Luces y Fondos ambientales difuminados -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
     <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl filter animate-blob"></div>
-    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl filter animate-blob animation-delay-2000"></div>
-    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl filter animate-blob animation-delay-4000"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl filter animate-blob [animation-delay:2000ms]"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl filter animate-blob [animation-delay:4000ms]"></div>
   </div>
 
   <!-- Barra de Navegación -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/70 border-b border-slate-800/80 transition-all">
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Logo y Título -->
@@ -90,13 +90,18 @@
           </span>
           <span class="block text-xs font-medium text-slate-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            GitHub Hub
+            GitHub Hub Activo
           </span>
         </div>
       </a>
 
-      <!-- Accesos Rápidos -->
+      <!-- Accesos Rápidos y Contador de Proyectos -->
       <div class="flex items-center gap-3">
+        <div id="repoBadge" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold">
+          <i class="fa-solid fa-cloud-bolt text-indigo-400"></i>
+          <span id="repoCountText">Conectando...</span>
+        </div>
+        
         <a 
           href="https://github.com/jesymca" 
           target="_blank" 
@@ -114,27 +119,28 @@
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
     
     <!-- Hero / Presentación -->
-    <div class="text-center max-w-3xl mx-auto mb-14 space-y-4">
+    <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 backdrop-blur-md">
-        <i class="fa-solid fa-code-branch"></i>
-        <span>Despliegues en GitHub Pages</span>
+        <i class="fa-solid fa-bolt"></i>
+        <span>Sincronización Automática con GitHub Pages</span>
       </div>
+      
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight">
         Catálogo de <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Proyectos Activos</span>
       </h1>
+      
       <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
-        Explora y accede rápidamente a los sistemas de gestión, plataformas educativas y herramientas interactivas desarrolladas y alojadas en línea.
+        Explora y accede directamente a las herramientas, plataformas y despliegues web alojados en mi ecosistema de GitHub.
       </p>
 
-      <!-- Barra de Búsqueda y Filtros -->
+      <!-- Barra de Búsqueda -->
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto">
-        <!-- Input de Búsqueda -->
         <div class="relative w-full">
           <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
           <input 
             type="text" 
             id="searchInput" 
-            placeholder="Buscar proyecto por nombre o categoría..." 
+            placeholder="Buscar proyecto por nombre, categoría o palabra clave..." 
             class="w-full pl-11 pr-10 py-3 bg-slate-900/90 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent backdrop-blur-md transition shadow-inner"
             oninput="filtrarProyectos()"
           >
@@ -149,269 +155,393 @@
         </div>
       </div>
 
-      <!-- Filtros por Categoría -->
+      <!-- Filtros por Categoría dinámicos -->
       <div class="flex flex-wrap items-center justify-center gap-2 pt-2" id="categoryFilters">
         <button onclick="filtrarCategoria('todos')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 shadow-sm transition">Todos</button>
-        <button onclick="filtrarCategoria('gestion')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition">Logística & Gestión</button>
-        <button onclick="filtrarCategoria('educacion')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition">Educación</button>
-        <button onclick="filtrarCategoria('web')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition">Web & Apps</button>
       </div>
     </div>
 
-    <!-- Grid de Proyectos -->
-    <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- PROYECTO 1: Inventario -->
-      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1 flex flex-col justify-between"
-           data-title="inventario control stock almacén productos" 
-           data-category="gestion">
-        <div>
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-boxes-stacked"></i>
-            </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Activo
-            </span>
-          </div>
-          <div class="mb-2">
-            <span class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">Gestión & Stock</span>
-            <h2 class="text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">Sistema de Inventario</h2>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Control integral de existencias, entradas, salidas y catálogo de productos con seguimiento eficiente de inventarios.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-          <a href="https://jesymca.github.io/inventario" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all shadow-md shadow-indigo-600/20 group-hover:shadow-indigo-600/40">
-            <span>Abrir Aplicación</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-          <button onclick="copiarEnlace('https://jesymca.github.io/inventario')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-            <i class="fa-regular fa-copy text-sm"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PROYECTO 2: Kizme -->
-      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-pink-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10 hover:-translate-y-1 flex flex-col justify-between"
-           data-title="kizme web app dinamica interactiva" 
-           data-category="web">
-        <div>
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-heart-pulse"></i>
-            </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Activo
-            </span>
-          </div>
-          <div class="mb-2">
-            <span class="text-xs font-semibold text-pink-400 uppercase tracking-wider">Aplicación Web</span>
-            <h2 class="text-xl font-bold text-white group-hover:text-pink-300 transition-colors">Kizme</h2>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Experiencia web interactiva con interfaz intuitiva, diseñada para brindar dinamismo y conectividad moderna.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-          <a href="https://jesymca.github.io/kizme" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-medium text-sm transition-all shadow-md shadow-pink-600/20 group-hover:shadow-pink-600/40">
-            <span>Abrir Aplicación</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-          <button onclick="copiarEnlace('https://jesymca.github.io/kizme')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-            <i class="fa-regular fa-copy text-sm"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PROYECTO 3: Venplay -->
-      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-1 flex flex-col justify-between"
-           data-title="venplay juegos multimedia entretenimiento" 
-           data-category="web">
-        <div>
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-gamepad"></i>
-            </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Activo
-            </span>
-          </div>
-          <div class="mb-2">
-            <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Multimedia & Ocio</span>
-            <h2 class="text-xl font-bold text-white group-hover:text-amber-300 transition-colors">Venplay</h2>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Plataforma de entretenimiento y contenido multimedia con acceso rápido y diseño adaptativo a pantallas móviles y PC.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-          <a href="https://jesymca.github.io/venplay" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-medium text-sm transition-all shadow-md shadow-amber-600/20 group-hover:shadow-amber-600/40">
-            <span>Abrir Aplicación</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-          <button onclick="copiarEnlace('https://jesymca.github.io/venplay')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-            <i class="fa-regular fa-copy text-sm"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PROYECTO 4: Planificación del Proceso de Aprendizaje -->
-      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1 flex flex-col justify-between"
-           data-title="planificacion del proceso de aprendizaje educacion docente clases curriculo" 
-           data-category="educacion">
-        <div>
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-chalkboard-user"></i>
-            </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Activo
-            </span>
-          </div>
-          <div class="mb-2">
-            <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Gestión Pedagógica</span>
-            <h2 class="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">Planificación Docente</h2>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Herramienta estructurada para la formulación, diseño de estrategias y cronogramas del proceso de enseñanza-aprendizaje.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-          <a href="https://jesymca.github.io/Planificaci-n-del-Proceso-de-Aprendizaje/" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all shadow-md shadow-emerald-600/20 group-hover:shadow-emerald-600/40">
-            <span>Abrir Aplicación</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-          <button onclick="copiarEnlace('https://jesymca.github.io/Planificaci-n-del-Proceso-de-Aprendizaje/')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-            <i class="fa-regular fa-copy text-sm"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PROYECTO 5: Evaluación de Aprendizajes -->
-      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-cyan-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col justify-between"
-           data-title="evaluacion de aprendizajes notas rubricas calificaciones estudiantes" 
-           data-category="educacion">
-        <div>
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Activo
-            </span>
-          </div>
-          <div class="mb-2">
-            <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Métrica Educativa</span>
-            <h2 class="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">Evaluación de Aprendizajes</h2>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Módulo para el registro, ponderación de rúbricas y seguimiento continuo del rendimiento y logros estudiantiles.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-          <a href="https://jesymca.github.io/EvaluacionAprendizajes/" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-medium text-sm transition-all shadow-md shadow-cyan-600/20 group-hover:shadow-cyan-600/40">
-            <span>Abrir Aplicación</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-          <button onclick="copiarEnlace('https://jesymca.github.io/EvaluacionAprendizajes/')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-            <i class="fa-regular fa-copy text-sm"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- PROYECTO 6: Control de Gandolas -->
-      <div class="project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 hover:border-violet-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-500/10 hover:-translate-y-1 flex flex-col justify-between"
-           data-title="control gandolas camiones transporte logistica carga pesaje despacho" 
-           data-category="gestion">
-        <div>
-          <div class="flex items-start justify-between gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-truck-moving"></i>
-            </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Activo
-            </span>
-          </div>
-          <div class="mb-2">
-            <span class="text-xs font-semibold text-violet-400 uppercase tracking-wider">Transporte Pesado</span>
-            <h2 class="text-xl font-bold text-white group-hover:text-violet-300 transition-colors">Control de Gandolas</h2>
-          </div>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Monitoreo logístico de tráfico pesado, registros de pesaje, despachos, conductores y tiempos de carga/descarga.
-          </p>
-        </div>
-        <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-          <a href="https://jesymca.github.io/control_gandolas/" target="_blank" rel="noopener noreferrer" 
-             class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium text-sm transition-all shadow-md shadow-violet-600/20 group-hover:shadow-violet-600/40">
-            <span>Abrir Aplicación</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-          <button onclick="copiarEnlace('https://jesymca.github.io/control_gandolas/')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-            <i class="fa-regular fa-copy text-sm"></i>
-          </button>
-        </div>
-      </div>
-
+    <!-- Skeleton Loader durante la carga -->
+    <div id="loadingSkeleton" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="animate-pulse bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 h-72"></div>
+      <div class="animate-pulse bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 h-72"></div>
+      <div class="animate-pulse bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 h-72"></div>
     </div>
 
-    <!-- Mensaje cuando no hay resultados de búsqueda -->
+    <!-- Grid de Proyectos Dinámicos -->
+    <div id="projectsGrid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <!-- Sin Resultados -->
     <div id="noResults" class="hidden text-center py-16 px-4">
       <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 text-2xl">
         <i class="fa-solid fa-folder-open"></i>
       </div>
       <h3 class="text-lg font-bold text-slate-200">No se encontraron proyectos</h3>
-      <p class="text-slate-500 text-sm mt-1 max-w-sm mx-auto">Prueba con otro término de búsqueda o selecciona la categoría "Todos".</p>
-      <button onclick="limpiarBusqueda(); filtrarCategoria('todos');" class="mt-4 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition">
+      <p class="text-slate-500 text-sm mt-1 max-w-sm mx-auto">Prueba con otro término de búsqueda o restablece los filtros.</p>
+      <button onclick="limpiarBusqueda(); filtrarCategoria('todos');" class="mt-4 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-md shadow-indigo-600/30">
         Restablecer Filtros
       </button>
     </div>
 
   </main>
 
-  <!-- Notificación Toast Copiado -->
+  <!-- Notificación Toast de Enlace Copiado -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 bg-slate-900 text-white border border-indigo-500/50 rounded-xl shadow-2xl backdrop-blur-lg">
     <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs">
       <i class="fa-solid fa-check"></i>
     </div>
-    <span class="text-xs font-medium" id="toastMessage">Enlace copiado al portapapeles</span>
+    <span class="text-xs font-medium" id="toastMessage">¡Enlace copiado al portapapeles!</span>
   </div>
 
   <!-- Pie de Página -->
-  <footer class="border-t border-slate-900 bg-slate-950/80 backdrop-blur-md py-8 text-center text-xs text-slate-500">
+  <footer class="border-t border-slate-900 bg-slate-950/90 backdrop-blur-md py-8 text-center text-xs text-slate-500 mt-auto">
     <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p>© <span id="currentYear"></span> JESYMCA. Todos los derechos reservados.</p>
       <div class="flex items-center gap-4 text-slate-400">
-        <a href="https://github.com/jesymca" target="_blank" class="hover:text-indigo-400 transition flex items-center gap-1.5">
+        <a href="https://github.com/jesymca" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-400 transition flex items-center gap-1.5">
           <i class="fa-brands fa-github"></i>
-          <span>GitHub</span>
+          <span>GitHub Oficial</span>
         </a>
         <span>•</span>
-        <span class="text-slate-600">Desarrollado con ❤️ para GitHub Pages</span>
+        <span class="text-slate-600">Sincronización Automática</span>
       </div>
     </div>
   </footer>
 
-  <!-- Lógica JavaScript -->
+  <!-- Lógica Dinámica: GitHub API, Cache, Filtros y Renderizado -->
   <script>
-    // Configurar año actual en el pie de página
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+    const GITHUB_USERNAME = 'jesymca';
+    const CACHE_KEY = `gh_repos_${GITHUB_USERNAME}`;
+    const CACHE_EXPIRY_MINUTES = 15;
+
+    let todosLosProyectos = [];
     let categoriaActual = 'todos';
 
-    // Función para filtrar proyectos por búsqueda y categoría
+    // Reglas temáticas: asigna iconos, colores y nombres limpios de categorías según tópicos o nombres
+    const TEMAS_CONFIG = [
+      {
+        clave: ['inventario', 'stock', 'almacen', 'logistica', 'deposito'],
+        icono: 'fa-boxes-stacked',
+        categoria: 'Logística & Gestión',
+        colorClass: 'blue',
+        btnBg: 'bg-blue-600 hover:bg-blue-500',
+        textClass: 'text-blue-400',
+        bgClass: 'bg-blue-500/10',
+        borderClass: 'border-blue-500/20',
+        hoverBorder: 'hover:border-blue-500/50',
+        hoverShadow: 'hover:shadow-blue-500/10'
+      },
+      {
+        clave: ['gandola', 'transporte', 'pesaje', 'camion', 'carga', 'flete'],
+        icono: 'fa-truck-moving',
+        categoria: 'Transporte Pesado',
+        colorClass: 'violet',
+        btnBg: 'bg-violet-600 hover:bg-violet-500',
+        textClass: 'text-violet-400',
+        bgClass: 'bg-violet-500/10',
+        borderClass: 'border-violet-500/20',
+        hoverBorder: 'hover:border-violet-500/50',
+        hoverShadow: 'hover:shadow-violet-500/10'
+      },
+      {
+        clave: ['aprendizaje', 'educacion', 'docente', 'evaluacion', 'escuela', 'notas', 'clase', 'rubricas'],
+        icono: 'fa-graduation-cap',
+        categoria: 'Educación',
+        colorClass: 'emerald',
+        btnBg: 'bg-emerald-600 hover:bg-emerald-500',
+        textClass: 'text-emerald-400',
+        bgClass: 'bg-emerald-500/10',
+        borderClass: 'border-emerald-500/20',
+        hoverBorder: 'hover:border-emerald-500/50',
+        hoverShadow: 'hover:shadow-emerald-500/10'
+      },
+      {
+        clave: ['play', 'game', 'juego', 'multimedia', 'ocio', 'video', 'entretenimiento'],
+        icono: 'fa-gamepad',
+        categoria: 'Multimedia & Ocio',
+        colorClass: 'amber',
+        btnBg: 'bg-amber-600 hover:bg-amber-500',
+        textClass: 'text-amber-400',
+        bgClass: 'bg-amber-500/10',
+        borderClass: 'border-amber-500/20',
+        hoverBorder: 'hover:border-amber-500/50',
+        hoverShadow: 'hover:shadow-amber-500/10'
+      },
+      {
+        clave: ['kizme', 'social', 'amor', 'interactivo', 'cita', 'chat'],
+        icono: 'fa-heart-pulse',
+        categoria: 'Aplicación Web',
+        colorClass: 'pink',
+        btnBg: 'bg-pink-600 hover:bg-pink-500',
+        textClass: 'text-pink-400',
+        bgClass: 'bg-pink-500/10',
+        borderClass: 'border-pink-500/20',
+        hoverBorder: 'hover:border-pink-500/50',
+        hoverShadow: 'hover:shadow-pink-500/10'
+      }
+    ];
+
+    const TEMA_POR_DEFECTO = {
+      icono: 'fa-cube',
+      categoria: 'Web App',
+      colorClass: 'indigo',
+      btnBg: 'bg-indigo-600 hover:bg-indigo-500',
+      textClass: 'text-indigo-400',
+      bgClass: 'bg-indigo-500/10',
+      borderClass: 'border-indigo-500/20',
+      hoverBorder: 'hover:border-indigo-500/50',
+      hoverShadow: 'hover:shadow-indigo-500/10'
+    };
+
+    function obtenerEstiloPorContenido(nombre, descripcion, topics) {
+      const textoCompleto = `${nombre} ${descripcion || ''} ${(topics || []).join(' ')}`.toLowerCase();
+      for (const tema of TEMAS_CONFIG) {
+        if (tema.clave.some(k => textoCompleto.includes(k))) {
+          return tema;
+        }
+      }
+      return TEMA_POR_DEFECTO;
+    }
+
+    // Datos estáticos de respaldo si la API excede la tasa de peticiones (403 Rate Limit)
+    const PROYECTOS_FALLBACK = [
+      {
+        name: "inventario",
+        nombreLimpio: "Sistema de Inventario",
+        description: "Control integral de existencias, entradas, salidas y catálogo de productos con seguimiento continuo.",
+        url: "https://jesymca.github.io/inventario",
+        githubUrl: "https://github.com/jesymca/inventario",
+        topics: ["inventario", "stock", "gestion"],
+        categoria: "Logística & Gestión",
+        tema: TEMAS_CONFIG[0]
+      },
+      {
+        name: "kizme",
+        nombreLimpio: "Kizme",
+        description: "Experiencia web interactiva con interfaz dinámica diseñada para brindar conectividad moderna.",
+        url: "https://jesymca.github.io/kizme",
+        githubUrl: "https://github.com/jesymca/kizme",
+        topics: ["kizme", "web"],
+        categoria: "Aplicación Web",
+        tema: TEMAS_CONFIG[4]
+      },
+      {
+        name: "venplay",
+        nombreLimpio: "Venplay",
+        description: "Plataforma de entretenimiento y contenido multimedia con acceso rápido y diseño adaptativo multidispositivo.",
+        url: "https://jesymca.github.io/venplay",
+        githubUrl: "https://github.com/jesymca/venplay",
+        topics: ["play", "multimedia"],
+        categoria: "Multimedia & Ocio",
+        tema: TEMAS_CONFIG[3]
+      },
+      {
+        name: "Planificaci-n-del-Proceso-de-Aprendizaje",
+        nombreLimpio: "Planificación Docente",
+        description: "Herramienta estructurada para la formulación, diseño de estrategias y cronogramas pedagógicos.",
+        url: "https://jesymca.github.io/Planificaci-n-del-Proceso-de-Aprendizaje/",
+        githubUrl: "https://github.com/jesymca/Planificaci-n-del-Proceso-de-Aprendizaje",
+        topics: ["educacion", "docente"],
+        categoria: "Educación",
+        tema: TEMAS_CONFIG[2]
+      },
+      {
+        name: "EvaluacionAprendizajes",
+        nombreLimpio: "Evaluación de Aprendizajes",
+        description: "Módulo para el registro, ponderación de rúbricas y seguimiento continuo del rendimiento escolar.",
+        url: "https://jesymca.github.io/EvaluacionAprendizajes/",
+        githubUrl: "https://github.com/jesymca/EvaluacionAprendizajes",
+        topics: ["educacion", "evaluacion"],
+        categoria: "Educación",
+        tema: TEMAS_CONFIG[2]
+      },
+      {
+        name: "control_gandolas",
+        nombreLimpio: "Control de Gandolas",
+        description: "Monitoreo logístico de tráfico pesado, registros de pesaje, despachos, conductores y tiempos de carga.",
+        url: "https://jesymca.github.io/control_gandolas/",
+        githubUrl: "https://github.com/jesymca/control_gandolas",
+        topics: ["gandola", "transporte"],
+        categoria: "Transporte Pesado",
+        tema: TEMAS_CONFIG[1]
+      }
+    ];
+
+    function limpiarNombreRepo(nombre) {
+      return nombre
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, letra => letra.toUpperCase());
+    }
+
+    // Consulta con soporte de cache local
+    async function obtenerDatosGitHub() {
+      const cacheData = localStorage.getItem(CACHE_KEY);
+      const cacheTimestamp = localStorage.getItem(`${CACHE_KEY}_time`);
+
+      if (cacheData && cacheTimestamp) {
+        const transcurridoMin = (Date.now() - parseInt(cacheTimestamp, 10)) / (1000 * 60);
+        if (transcurridoMin < CACHE_EXPIRY_MINUTES) {
+          return JSON.parse(cacheData);
+        }
+      }
+
+      const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=pushed`);
+      if (!response.ok) {
+        throw new Error(`Error GitHub API: ${response.status}`);
+      }
+
+      const repos = await response.json();
+      localStorage.setItem(CACHE_KEY, JSON.stringify(repos));
+      localStorage.setItem(`${CACHE_KEY}_time`, Date.now().toString());
+      return repos;
+    }
+
+    async function inicializarHub() {
+      const loadingSkeleton = document.getElementById('loadingSkeleton');
+      const projectsGrid = document.getElementById('projectsGrid');
+      const repoBadge = document.getElementById('repoBadge');
+      const repoCountText = document.getElementById('repoCountText');
+
+      try {
+        const repos = await obtenerDatosGitHub();
+
+        // Criterio de reconocimiento de proyectos activos:
+        // 1. Excluir el repositorio raíz que contiene este mismo hub (jesymca.github.io)
+        // 2. No debe ser un fork ni estar archivado
+        // 3. Debe tener GitHub Pages activado (has_pages: true) o una URL en el campo 'homepage'
+        const reposFiltrados = repos.filter(repo => {
+          const esSitioRaiz = repo.name.toLowerCase() === `${GITHUB_USERNAME.toLowerCase()}.github.io`;
+          const tieneDespliegue = repo.has_pages || (repo.homepage && repo.homepage.trim().length > 5);
+          return !repo.fork && !repo.archived && !esSitioRaiz && tieneDespliegue;
+        });
+
+        if (reposFiltrados.length === 0) {
+          usarFallback("No se encontraron páginas automáticas configuradas; usando catálogo base.");
+          return;
+        }
+
+        todosLosProyectos = reposFiltrados.map(repo => {
+          const tema = obtenerEstiloPorContenido(repo.name, repo.description, repo.topics);
+          const liveUrl = (repo.homepage && repo.homepage.startsWith('http')) 
+            ? repo.homepage.trim() 
+            : `https://${GITHUB_USERNAME}.github.io/${repo.name}/`;
+
+          return {
+            name: repo.name,
+            nombreLimpio: limpiarNombreRepo(repo.name),
+            description: repo.description || 'Aplicación web desplegada y activa en GitHub Pages.',
+            url: liveUrl,
+            githubUrl: repo.html_url,
+            topics: repo.topics || [],
+            categoria: tema.categoria,
+            tema: tema,
+            stars: repo.stargazers_count
+          };
+        });
+
+        renderizarFiltrosCategorias();
+        renderizarTarjetas(todosLosProyectos);
+
+        repoBadge.classList.remove('hidden');
+        repoCountText.textContent = `${todosLosProyectos.length} proyectos activos`;
+      } catch (err) {
+        console.warn('Fallo al obtener repositorios de la API o límite alcanzado:', err);
+        usarFallback();
+      } finally {
+        loadingSkeleton.classList.add('hidden');
+        projectsGrid.classList.remove('hidden');
+      }
+    }
+
+    function usarFallback() {
+      todosLosProyectos = PROYECTOS_FALLBACK;
+      renderizarFiltrosCategorias();
+      renderizarTarjetas(todosLosProyectos);
+      const repoBadge = document.getElementById('repoBadge');
+      const repoCountText = document.getElementById('repoCountText');
+      repoBadge.classList.remove('hidden');
+      repoCountText.textContent = `${todosLosProyectos.length} proyectos locales`;
+    }
+
+    // Renderizar botones de filtro por categoría
+    function renderizarFiltrosCategorias() {
+      const container = document.getElementById('categoryFilters');
+      const categorias = Array.from(new Set(todosLosProyectos.map(p => p.categoria)));
+
+      container.innerHTML = `
+        <button onclick="filtrarCategoria('todos')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 shadow-sm transition">
+          Todos (${todosLosProyectos.length})
+        </button>
+      `;
+
+      categorias.forEach(cat => {
+        const count = todosLosProyectos.filter(p => p.categoria === cat).length;
+        const btn = document.createElement('button');
+        btn.onclick = () => filtrarCategoria(cat);
+        btn.className = "filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700 transition";
+        btn.textContent = `${cat} (${count})`;
+        btn.setAttribute('data-cat-name', cat);
+        container.appendChild(btn);
+      });
+    }
+
+    // Renderizar tarjetas en el Grid
+    function renderizarTarjetas(proyectos) {
+      const grid = document.getElementById('projectsGrid');
+      grid.innerHTML = '';
+
+      proyectos.forEach(p => {
+        const t = p.tema;
+        const card = document.createElement('div');
+        card.className = `project-card group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 ${t.hoverBorder} rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl ${t.hoverShadow} hover:-translate-y-1 flex flex-col justify-between`;
+        card.setAttribute('data-title', `${p.name} ${p.nombreLimpio} ${p.description} ${(p.topics || []).join(' ')}`.toLowerCase());
+        card.setAttribute('data-category', p.categoria);
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <div class="w-12 h-12 rounded-xl ${t.bgClass} border ${t.borderClass} ${t.textClass} flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid ${t.icono}"></i>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Online
+              </span>
+            </div>
+
+            <div class="mb-2">
+              <span class="text-xs font-semibold ${t.textClass} uppercase tracking-wider">${p.categoria}</span>
+              <h2 class="text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">${p.nombreLimpio}</h2>
+            </div>
+
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              ${p.description}
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
+            <a href="${p.url}" target="_blank" rel="noopener noreferrer" 
+               class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl ${t.btnBg} text-white font-medium text-sm transition-all shadow-md">
+              <span>Abrir App</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+
+            <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Ver Repositorio">
+              <i class="fa-brands fa-github text-sm"></i>
+            </a>
+
+            <button onclick="copiarEnlace('${p.url}')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
+              <i class="fa-regular fa-copy text-sm"></i>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filtrar búsqueda por texto y categoría actual
     function filtrarProyectos() {
       const input = document.getElementById('searchInput');
       const filter = input.value.toLowerCase().trim();
@@ -419,7 +549,6 @@
       const clearBtn = document.getElementById('clearSearch');
       let visibles = 0;
 
-      // Mostrar/ocultar botón para limpiar input
       if (filter.length > 0) {
         clearBtn.classList.remove('hidden');
       } else {
@@ -441,7 +570,6 @@
         }
       });
 
-      // Mostrar o esconder estado vacío
       const noResults = document.getElementById('noResults');
       if (visibles === 0) {
         noResults.classList.remove('hidden');
@@ -450,27 +578,25 @@
       }
     }
 
-    // Filtro rápido por botones de categoría
+    // Filtro por botones
     function filtrarCategoria(cat) {
       categoriaActual = cat;
       const botones = document.querySelectorAll('.filter-btn');
 
       botones.forEach(btn => {
-        btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-500');
-        btn.classList.add('bg-slate-900', 'text-slate-400', 'border-slate-800');
+        const esActivo = (cat === 'todos' && btn.textContent.includes('Todos')) || (btn.getAttribute('data-cat-name') === cat);
+        if (esActivo) {
+          btn.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-500');
+          btn.classList.remove('bg-slate-900', 'text-slate-400', 'border-slate-800');
+        } else {
+          btn.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-500');
+          btn.classList.add('bg-slate-900', 'text-slate-400', 'border-slate-800');
+        }
       });
-
-      // Activar botón seleccionado
-      const btnActivo = event.target;
-      if (btnActivo) {
-        btnActivo.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-500');
-        btnActivo.classList.remove('bg-slate-900', 'text-slate-400', 'border-slate-800');
-      }
 
       filtrarProyectos();
     }
 
-    // Limpiar input de búsqueda
     function limpiarBusqueda() {
       const input = document.getElementById('searchInput');
       input.value = '';
@@ -478,21 +604,20 @@
       input.focus();
     }
 
-    // Copiar enlace al portapapeles con feedback tipo toast
+    // Copiar enlace al portapapeles
     function copiarEnlace(url) {
-      // Método seguro de copia compatible con iframes
-      const tempInput = document.createElement('input');
-      tempInput.value = url;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url);
+      } else {
+        const tempInput = document.createElement('input');
+        tempInput.value = url;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
 
-      // Mostrar Toast
       const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toastMessage');
-      toastMessage.textContent = '¡Enlace copiado al portapapeles!';
-      
       toast.classList.remove('translate-y-20', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
 
@@ -501,6 +626,9 @@
         toast.classList.add('translate-y-20', 'opacity-0');
       }, 2500);
     }
+
+    // Iniciar al cargar el DOM
+    document.addEventListener('DOMContentLoaded', inicializarHub);
   </script>
 </body>
 </html>
