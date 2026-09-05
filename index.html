@@ -311,31 +311,34 @@
         name: "inventario",
         nombreLimpio: "Sistema de Inventario",
         description: "Control integral de existencias, entradas, salidas y catálogo de productos con seguimiento continuo.",
-        url: "https://jesymca.github.io/inventario",
+        url: "https://jesymca.github.io/inventario/",
         githubUrl: "https://github.com/jesymca/inventario",
         topics: ["inventario", "stock", "gestion"],
         categoria: "Logística & Gestión",
-        tema: TEMAS_CONFIG[0]
+        tema: TEMAS_CONFIG[0],
+        hasPages: true
       },
       {
         name: "kizme",
         nombreLimpio: "Kizme",
         description: "Experiencia web interactiva con interfaz dinámica diseñada para brindar conectividad moderna.",
-        url: "https://jesymca.github.io/kizme",
+        url: "https://jesymca.github.io/kizme/",
         githubUrl: "https://github.com/jesymca/kizme",
         topics: ["kizme", "web"],
         categoria: "Aplicación Web",
-        tema: TEMAS_CONFIG[4]
+        tema: TEMAS_CONFIG[4],
+        hasPages: true
       },
       {
         name: "venplay",
         nombreLimpio: "Venplay",
         description: "Plataforma de entretenimiento y contenido multimedia con acceso rápido y diseño adaptativo multidispositivo.",
-        url: "https://jesymca.github.io/venplay",
+        url: "https://jesymca.github.io/venplay/",
         githubUrl: "https://github.com/jesymca/venplay",
         topics: ["play", "multimedia"],
         categoria: "Multimedia & Ocio",
-        tema: TEMAS_CONFIG[3]
+        tema: TEMAS_CONFIG[3],
+        hasPages: true
       },
       {
         name: "Planificaci-n-del-Proceso-de-Aprendizaje",
@@ -345,7 +348,8 @@
         githubUrl: "https://github.com/jesymca/Planificaci-n-del-Proceso-de-Aprendizaje",
         topics: ["educacion", "docente"],
         categoria: "Educación",
-        tema: TEMAS_CONFIG[2]
+        tema: TEMAS_CONFIG[2],
+        hasPages: true
       },
       {
         name: "EvaluacionAprendizajes",
@@ -355,7 +359,8 @@
         githubUrl: "https://github.com/jesymca/EvaluacionAprendizajes",
         topics: ["educacion", "evaluacion"],
         categoria: "Educación",
-        tema: TEMAS_CONFIG[2]
+        tema: TEMAS_CONFIG[2],
+        hasPages: true
       },
       {
         name: "control_gandolas",
@@ -365,7 +370,8 @@
         githubUrl: "https://github.com/jesymca/control_gandolas",
         topics: ["gandola", "transporte"],
         categoria: "Transporte Pesado",
-        tema: TEMAS_CONFIG[1]
+        tema: TEMAS_CONFIG[1],
+        hasPages: true
       }
     ];
 
@@ -410,7 +416,7 @@
         // Criterio de reconocimiento de proyectos activos:
         // 1. Excluir el repositorio raíz que contiene este mismo hub (jesymca.github.io)
         // 2. No debe ser un fork ni estar archivado
-        // 3. Debe tener GitHub Pages activado (has_pages: true) o una URL en el campo 'homepage'
+        // 3. Debe tener GitHub Pages activado (has_pages: true), o tener homepage
         const reposFiltrados = repos.filter(repo => {
           const esSitioRaiz = repo.name.toLowerCase() === `${GITHUB_USERNAME.toLowerCase()}.github.io`;
           const tieneDespliegue = repo.has_pages || (repo.homepage && repo.homepage.trim().length > 5);
@@ -424,6 +430,8 @@
 
         todosLosProyectos = reposFiltrados.map(repo => {
           const tema = obtenerEstiloPorContenido(repo.name, repo.description, repo.topics);
+          
+          // Genera la URL de GitHub Pages
           const liveUrl = (repo.homepage && repo.homepage.startsWith('http')) 
             ? repo.homepage.trim() 
             : `https://${GITHUB_USERNAME}.github.io/${repo.name}/`;
@@ -437,7 +445,8 @@
             topics: repo.topics || [],
             categoria: tema.categoria,
             tema: tema,
-            stars: repo.stargazers_count
+            stars: repo.stargazers_count,
+            hasPages: repo.has_pages || false // 🔥 Guardamos si tiene Pages activado
           };
         });
 
@@ -455,7 +464,8 @@
       }
     }
 
-    function usarFallback() {
+    function usarFallback(mensaje) {
+      if (mensaje) console.warn(mensaje);
       todosLosProyectos = PROYECTOS_FALLBACK;
       renderizarFiltrosCategorias();
       renderizarTarjetas(todosLosProyectos);
@@ -499,16 +509,47 @@
         card.setAttribute('data-title', `${p.name} ${p.nombreLimpio} ${p.description} ${(p.topics || []).join(' ')}`.toLowerCase());
         card.setAttribute('data-category', p.categoria);
 
+        // 🔥 GENERAMOS LOS BOTONES SEGÚN SI TIENE PAGES O NO
+        const botonesHTML = p.hasPages ? `
+          <div class="grid grid-cols-2 gap-2">
+            <a href="${p.url}" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl ${t.btnBg} text-white font-medium text-sm transition-all shadow-md">
+              <i class="fa-regular fa-globe"></i>
+              <span>GitHub Pages</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+            <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 font-medium text-sm transition">
+              <i class="fa-brands fa-github"></i>
+              <span>Ver Repositorio</span>
+            </a>
+          </div>
+        ` : `
+          <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 font-medium text-sm transition w-full">
+            <i class="fa-brands fa-github"></i>
+            <span>Ver Repositorio</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        `;
+
         card.innerHTML = `
           <div>
             <div class="flex items-start justify-between gap-4 mb-4">
               <div class="w-12 h-12 rounded-xl ${t.bgClass} border ${t.borderClass} ${t.textClass} flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
                 <i class="fa-solid ${t.icono}"></i>
               </div>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Online
-              </span>
+              ${p.hasPages ? `
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Online
+                </span>
+              ` : `
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-500/10 text-slate-400 border border-slate-500/20">
+                  <i class="fa-regular fa-code"></i>
+                  Repositorio
+                </span>
+              `}
             </div>
 
             <div class="mb-2">
@@ -521,20 +562,8 @@
             </p>
           </div>
 
-          <div class="pt-4 border-t border-slate-800/80 flex items-center gap-2">
-            <a href="${p.url}" target="_blank" rel="noopener noreferrer" 
-               class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl ${t.btnBg} text-white font-medium text-sm transition-all shadow-md">
-              <span>Abrir App</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-            </a>
-
-            <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Ver Repositorio">
-              <i class="fa-brands fa-github text-sm"></i>
-            </a>
-
-            <button onclick="copiarEnlace('${p.url}')" class="p-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/50 transition" title="Copiar Enlace">
-              <i class="fa-regular fa-copy text-sm"></i>
-            </button>
+          <div class="pt-4 border-t border-slate-800/80">
+            ${botonesHTML}
           </div>
         `;
         grid.appendChild(card);
