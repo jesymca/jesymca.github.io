@@ -12,7 +12,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Font Awesome Icons -->
+  <!-- Iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
@@ -224,11 +224,11 @@
     let todosLosProyectos = [];
     let categoriaActual = 'todos';
 
-    // Reglas temáticas: asigna iconos, colores y nombres limpios de categorías según tópicos o nombres
+    // Reglas temáticas: asigna iconos, colores y nombres limpios según el contenido del repo
     const TEMAS_CONFIG = [
       {
-        clave: ['inventario', 'stock', 'almacen', 'logistica', 'deposito'],
-        icono: 'fa-boxes-stacked',
+        clave: ['inventario', 'stock', 'almacen', 'logistica', 'deposito', 'productos', 'existencias', 'supply', 'warehouse', 'gestion'],
+        icono: 'bi bi-box-seam',
         categoria: 'Logística & Gestión',
         colorClass: 'blue',
         btnBg: 'bg-blue-600 hover:bg-blue-500',
@@ -239,8 +239,8 @@
         hoverShadow: 'hover:shadow-blue-500/10'
       },
       {
-        clave: ['gandola', 'transporte', 'pesaje', 'camion', 'carga', 'flete'],
-        icono: 'fa-truck-moving',
+        clave: ['gandola', 'transporte', 'pesaje', 'camion', 'carga', 'flete', 'fleet', 'delivery', 'vehiculo', 'logistica'],
+        icono: 'bi bi-truck',
         categoria: 'Transporte Pesado',
         colorClass: 'violet',
         btnBg: 'bg-violet-600 hover:bg-violet-500',
@@ -251,8 +251,8 @@
         hoverShadow: 'hover:shadow-violet-500/10'
       },
       {
-        clave: ['aprendizaje', 'educacion', 'docente', 'evaluacion', 'escuela', 'notas', 'clase', 'rubricas'],
-        icono: 'fa-graduation-cap',
+        clave: ['aprendizaje', 'educacion', 'docente', 'evaluacion', 'escuela', 'notas', 'clase', 'rubricas', 'student', 'teacher', 'curriculum', 'academy'],
+        icono: 'bi bi-mortarboard-fill',
         categoria: 'Educación',
         colorClass: 'emerald',
         btnBg: 'bg-emerald-600 hover:bg-emerald-500',
@@ -263,8 +263,8 @@
         hoverShadow: 'hover:shadow-emerald-500/10'
       },
       {
-        clave: ['play', 'game', 'juego', 'multimedia', 'ocio', 'video', 'entretenimiento'],
-        icono: 'fa-gamepad',
+        clave: ['play', 'game', 'juego', 'multimedia', 'ocio', 'video', 'entretenimiento', 'streaming', 'music', 'gaming', 'cinema'],
+        icono: 'bi bi-controller',
         categoria: 'Multimedia & Ocio',
         colorClass: 'amber',
         btnBg: 'bg-amber-600 hover:bg-amber-500',
@@ -275,8 +275,8 @@
         hoverShadow: 'hover:shadow-amber-500/10'
       },
       {
-        clave: ['kizme', 'social', 'amor', 'interactivo', 'cita', 'chat'],
-        icono: 'fa-heart-pulse',
+        clave: ['kizme', 'social', 'amor', 'interactivo', 'cita', 'chat', 'community', 'network', 'match', 'dating', 'friend', 'mensajes'],
+        icono: 'bi bi-heart-pulse',
         categoria: 'Aplicación Web',
         colorClass: 'pink',
         btnBg: 'bg-pink-600 hover:bg-pink-500',
@@ -285,11 +285,71 @@
         borderClass: 'border-pink-500/20',
         hoverBorder: 'hover:border-pink-500/50',
         hoverShadow: 'hover:shadow-pink-500/10'
+      },
+      {
+        clave: ['frontend', 'ui', 'ux', 'web', 'interface', 'design', 'layout', 'landing', 'portfolio', 'dashboard'],
+        icono: 'bi bi-palette',
+        categoria: 'Frontend & Diseño',
+        colorClass: 'cyan',
+        btnBg: 'bg-cyan-600 hover:bg-cyan-500',
+        textClass: 'text-cyan-400',
+        bgClass: 'bg-cyan-500/10',
+        borderClass: 'border-cyan-500/20',
+        hoverBorder: 'hover:border-cyan-500/50',
+        hoverShadow: 'hover:shadow-cyan-500/10'
+      },
+      {
+        clave: ['api', 'backend', 'server', 'node', 'express', 'database', 'php', 'sql', 'data', 'microservice', 'services'],
+        icono: 'bi bi-diagram-3',
+        categoria: 'Backend & API',
+        colorClass: 'rose',
+        btnBg: 'bg-rose-600 hover:bg-rose-500',
+        textClass: 'text-rose-400',
+        bgClass: 'bg-rose-500/10',
+        borderClass: 'border-rose-500/20',
+        hoverBorder: 'hover:border-rose-500/50',
+        hoverShadow: 'hover:shadow-rose-500/10'
+      },
+      {
+        clave: ['ia', 'ai', 'machine', 'learning', 'ml', 'python', 'data', 'analytics', 'inteligencia', 'predict', 'vision'],
+        icono: 'bi bi-cpu',
+        categoria: 'IA & Datos',
+        colorClass: 'teal',
+        btnBg: 'bg-teal-600 hover:bg-teal-500',
+        textClass: 'text-teal-400',
+        bgClass: 'bg-teal-500/10',
+        borderClass: 'border-teal-500/20',
+        hoverBorder: 'hover:border-teal-500/50',
+        hoverShadow: 'hover:shadow-teal-500/10'
+      },
+      {
+        clave: ['devops', 'cloud', 'deploy', 'docker', 'aws', 'ci', 'cd', 'infra', 'serverless', 'hosting'],
+        icono: 'bi bi-cloud',
+        categoria: 'Cloud & DevOps',
+        colorClass: 'indigo',
+        btnBg: 'bg-indigo-600 hover:bg-indigo-500',
+        textClass: 'text-indigo-400',
+        bgClass: 'bg-indigo-500/10',
+        borderClass: 'border-indigo-500/20',
+        hoverBorder: 'hover:border-indigo-500/50',
+        hoverShadow: 'hover:shadow-indigo-500/10'
+      },
+      {
+        clave: ['seguridad', 'security', 'auth', 'login', 'token', 'vpn', 'firewall', 'crypto', 'privacy'],
+        icono: 'bi bi-shield-lock',
+        categoria: 'Seguridad',
+        colorClass: 'lime',
+        btnBg: 'bg-lime-600 hover:bg-lime-500',
+        textClass: 'text-lime-400',
+        bgClass: 'bg-lime-500/10',
+        borderClass: 'border-lime-500/20',
+        hoverBorder: 'hover:border-lime-500/50',
+        hoverShadow: 'hover:shadow-lime-500/10'
       }
     ];
 
     const TEMA_POR_DEFECTO = {
-      icono: 'fa-cube',
+      icono: 'bi bi-cube',
       categoria: 'Web App',
       colorClass: 'indigo',
       btnBg: 'bg-indigo-600 hover:bg-indigo-500',
@@ -550,7 +610,7 @@
           <div>
             <div class="flex items-start justify-between gap-4 mb-4">
               <div class="w-12 h-12 rounded-xl ${t.bgClass} border ${t.borderClass} ${t.textClass} flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
-                <i class="fa-solid ${t.icono}"></i>
+                <i class="${t.icono}"></i>
               </div>
               ${p.hasPages ? `
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
